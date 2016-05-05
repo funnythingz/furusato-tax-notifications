@@ -8,23 +8,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.funnythingz.furusatotaxnotifications.domain.FurusatoTaxTopics;
+import com.funnythingz.furusatotaxnotifications.domain.FurusatoTaxTopicsRepository;
 import com.funnythingz.furusatotaxnotifications.helper.DialogHelper;
 import com.funnythingz.furusatotaxnotifications.helper.LogHelper;
 import com.funnythingz.furusatotaxnotifications.helper.RxBusProvider;
-import com.funnythingz.furusatotaxnotifications.infra.FurusatoTaxFeed;
-import com.funnythingz.furusatotaxnotifications.infra.GetFurusatoTaxNotificationsFeed;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
 import rx.Observable;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 
 public class MainActivity extends AppCompatActivity {
@@ -42,9 +36,9 @@ public class MainActivity extends AppCompatActivity {
                         .toObservable()
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(feed -> {
-                            if (feed instanceof GetFurusatoTaxNotificationsFeed) {
-                                GetFurusatoTaxNotificationsFeed f = (GetFurusatoTaxNotificationsFeed) feed;
-                                LogHelper.d(f + "");
+                            if (feed instanceof FurusatoTaxTopics) {
+                                FurusatoTaxTopics topics = (FurusatoTaxTopics) feed;
+                                LogHelper.d(topics + "");
                             }
                         })
         );
@@ -70,35 +64,16 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         refreshLayout.setOnRefreshListener(onRefreshListener);
 
-        fetchFurusatoTaxNotificationsFeed();
+        fetchFurusatoTaxTopics();
     }
 
-    private void fetchFurusatoTaxNotificationsFeed() {
-
-        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
-
-        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
-        httpClient.addInterceptor(logging);
-
-        // TODO: Feed受け取る部分
-        // 参考: https://futurestud.io/blog/retrofit-how-to-integrate-xml-converter
-        FurusatoTaxFeed furusatoTaxFeed = new Retrofit.Builder()
-                .baseUrl("http://rss2json.com/")
-                .client(httpClient.build())
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .build()
-                .create(FurusatoTaxFeed.class);
-
-        Observable<GetFurusatoTaxNotificationsFeed> observable = furusatoTaxFeed.getNotifications()
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread());
+    private void fetchFurusatoTaxTopics() {
 
         ProgressDialog progressDialog = DialogHelper.progressDialog(this, getString(R.string.loading), false);
         progressDialog.show();
 
-        observable.subscribe(new Observer<GetFurusatoTaxNotificationsFeed>() {
+        Observable<FurusatoTaxTopics> observable = FurusatoTaxTopicsRepository.getInstance().fetchFurusatoTaxTopics();
+        observable.subscribe(new Observer<FurusatoTaxTopics>() {
             @Override
             public void onCompleted() {
                 Log.d("Completed", "");
@@ -113,14 +88,10 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onNext(GetFurusatoTaxNotificationsFeed getFurusatoTaxNotificationsFeed) {
-                RxBusProvider.getInstance().send(getFurusatoTaxNotificationsFeed);
+            public void onNext(FurusatoTaxTopics furusatoTaxTopics) {
+                RxBusProvider.getInstance().send(furusatoTaxTopics);
             }
         });
-
-        furusatoTaxFeed.getNotifications()
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread());
     }
 
     private SwipeRefreshLayout.OnRefreshListener onRefreshListener = new SwipeRefreshLayout.OnRefreshListener() {
@@ -130,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     refreshLayout.setRefreshing(false);
-                    fetchFurusatoTaxNotificationsFeed();
+                    fetchFurusatoTaxTopics();
                 }
             });
         }

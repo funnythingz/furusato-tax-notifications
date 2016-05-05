@@ -9,8 +9,16 @@ import java.util.List;
 public class GetFurusatoTaxNotificationsFeed {
 
     @SerializedName("feed")
-    Feed feed;
+    private Feed feed;
 
     @SerializedName("items")
-    List<Entry> entries;
+    private List<Entry> entries;
+
+    public Feed getFeed() {
+        return feed;
+    }
+
+    public List<Entry> getEntries() {
+        return entries;
+    }
 }
