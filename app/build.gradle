@@ -46,6 +46,7 @@ dependencies {
         exclude module: 'stax'
         exclude module: 'xpp3'
     }
+    compile 'com.squareup.okhttp3:logging-interceptor:3.2.0'
     compile 'com.squareup.retrofit2:converter-gson:latest.release'
     compile 'com.squareup.retrofit2:adapter-rxjava:latest.release'
     compile 'io.reactivex:rxandroid:1.1.0'
