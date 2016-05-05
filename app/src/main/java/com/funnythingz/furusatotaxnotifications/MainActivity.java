@@ -39,6 +39,10 @@ public class MainActivity extends AppCompatActivity {
                             if (feed instanceof FurusatoTaxTopics) {
                                 FurusatoTaxTopics topics = (FurusatoTaxTopics) feed;
                                 LogHelper.d(topics + "");
+
+                                // TODO: FeedView
+
+                                // TODO: EntriesAdapter
                             }
                         })
         );
