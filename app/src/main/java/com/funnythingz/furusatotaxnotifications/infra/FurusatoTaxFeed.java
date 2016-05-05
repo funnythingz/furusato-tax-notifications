@@ -6,6 +6,6 @@ import rx.Observable;
 
 public interface FurusatoTaxFeed {
 
-    @GET("feed/notifications.xml")
+    @GET("api.json?rss_url=http://www.furusato-tax.jp/feed/notifications.xml")
     Observable<GetFurusatoTaxNotificationsFeed> getNotifications();
 }

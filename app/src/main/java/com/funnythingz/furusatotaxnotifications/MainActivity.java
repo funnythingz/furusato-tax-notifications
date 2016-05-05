@@ -1,8 +1,8 @@
 package com.funnythingz.furusatotaxnotifications;
 
-import android.os.Handler;
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -20,7 +20,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
-import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
 import rx.Observable;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
@@ -84,9 +84,9 @@ public class MainActivity extends AppCompatActivity {
         // TODO: Feed受け取る部分
         // 参考: https://futurestud.io/blog/retrofit-how-to-integrate-xml-converter
         FurusatoTaxFeed furusatoTaxFeed = new Retrofit.Builder()
-                .baseUrl("http://www.furusato-tax.jp/")
+                .baseUrl("http://rss2json.com/")
                 .client(httpClient.build())
-                .addConverterFactory(SimpleXmlConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build()
                 .create(FurusatoTaxFeed.class);
@@ -107,7 +107,6 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onError(Throwable e) {
-                // FIXME: XMLのパース意味不明すぎる。Feedの全部の要素を想定しなきゃいけないのか？
                 Log.e("Error: ", "", e);
                 progressDialog.dismiss();
                 Toast.makeText(getApplication(), getString(R.string.loading_error), Toast.LENGTH_SHORT).show();

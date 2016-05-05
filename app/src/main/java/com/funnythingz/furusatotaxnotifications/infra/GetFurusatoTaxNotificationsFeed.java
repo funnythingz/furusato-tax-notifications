@@ -1,28 +1,16 @@
 package com.funnythingz.furusatotaxnotifications.infra;
 
-import com.funnythingz.furusatotaxnotifications.domain.Author;
+import com.funnythingz.furusatotaxnotifications.domain.Entry;
+import com.funnythingz.furusatotaxnotifications.domain.Feed;
+import com.google.gson.annotations.SerializedName;
 
-import org.simpleframework.xml.Element;
-import org.simpleframework.xml.Root;
+import java.util.List;
 
-@Root(name = "feed")
 public class GetFurusatoTaxNotificationsFeed {
 
-    @Element(name = "id")
-    String id;
+    @SerializedName("feed")
+    Feed feed;
 
-    @Element(name = "title")
-    String title;
-
-    @Element(name = "updated")
-    String updated;
-
-    @Element(name = "author")
-    Author author;
-
-    @Element(name = "rights")
-    String rights;
-
-    @Element(name = "link")
-    String link;
+    @SerializedName("items")
+    List<Entry> entries;
 }
