@@ -17,6 +17,9 @@ public class Entry {
     @SerializedName("description")
     private String description;
 
+    @SerializedName("link")
+    private String link;
+
     public String getTitle() {
         return title;
     }
@@ -31,5 +34,9 @@ public class Entry {
 
     public String getDescription() {
         return description;
+    }
+
+    public String getLink() {
+        return link;
     }
 }
