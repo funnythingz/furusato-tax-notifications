@@ -4,23 +4,41 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".presentation.MainActivity">
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/refresh"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:id="@+id/feed_status_view"
+        android:layout_marginBottom="10dp">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/quote_text_view"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Hello World!"/>
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:background="#f1f2f3"
+            android:textSize="10dp"
+            android:textColor="#666666"
+            tools:text="引用元： ふるさとチョイス"/>
 
-    </android.support.v4.widget.SwipeRefreshLayout>
+        <android.support.v4.widget.SwipeRefreshLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/refresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ListView
+                android:id="@+id/furusato_tax_topics_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+    </LinearLayout>
 
 </RelativeLayout>

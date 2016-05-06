@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/furusato_tax_topics_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp">
+
+        <TextView
+            android:id="@+id/furusato_tax_topic_entry_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            tools:text="東京都千代田区 - ほげほげ情報"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            >
+
+            <TextView
+                android:id="@+id/furusato_tax_topic_entry_pubdate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#cccccc"
+                android:textSize="10dp"
+                tools:text="update: 2016-05-05"
+                />
+
+            <TextView
+                android:id="@+id/furusato_tax_topic_entry_author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#cccccc"
+                android:textSize="10dp"
+                android:layout_marginLeft="10dp"
+                tools:text="東京都千代田区"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

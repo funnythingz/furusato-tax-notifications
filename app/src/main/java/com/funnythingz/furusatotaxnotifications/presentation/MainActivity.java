@@ -6,14 +6,16 @@ import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.funnythingz.furusatotaxnotifications.R;
 import com.funnythingz.furusatotaxnotifications.domain.FurusatoTaxTopics;
 import com.funnythingz.furusatotaxnotifications.domain.FurusatoTaxTopicsRepository;
 import com.funnythingz.furusatotaxnotifications.helper.DialogHelper;
-import com.funnythingz.furusatotaxnotifications.helper.LogHelper;
 import com.funnythingz.furusatotaxnotifications.helper.RxBusProvider;
+import com.funnythingz.furusatotaxnotifications.presentation.adapter.FurusatoTaxTopicsAdapter;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -27,6 +29,12 @@ public class MainActivity extends AppCompatActivity {
     @Bind(R.id.refresh)
     SwipeRefreshLayout refreshLayout;
 
+    @Bind(R.id.quote_text_view)
+    TextView quoteTextView;
+
+    @Bind(R.id.furusato_tax_topics_view)
+    ListView furusatoTaxTopicsView;
+
     private CompositeSubscription compositeSubscription;
 
     @Override
@@ -36,14 +44,11 @@ public class MainActivity extends AppCompatActivity {
         compositeSubscription.add(RxBusProvider.getInstance()
                         .toObservable()
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(feed -> {
-                            if (feed instanceof FurusatoTaxTopics) {
-                                FurusatoTaxTopics topics = (FurusatoTaxTopics) feed;
-                                LogHelper.d(topics + "");
-
-                                // TODO: FeedView
-
-                                // TODO: EntriesAdapter
+                        .subscribe(m -> {
+                            if (m instanceof FurusatoTaxTopics) {
+                                FurusatoTaxTopics topics = (FurusatoTaxTopics) m;
+                                quoteTextView.setText(getString(R.string.quote) + topics.getFeed().getTitle());
+                                furusatoTaxTopicsView.setAdapter(new FurusatoTaxTopicsAdapter(getApplicationContext(), R.layout.adapter_furusato_tax_topics, topics.getEntries()));
                             }
                         })
         );
