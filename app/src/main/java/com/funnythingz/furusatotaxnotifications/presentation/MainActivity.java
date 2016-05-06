@@ -1,4 +1,4 @@
-package com.funnythingz.furusatotaxnotifications;
+package com.funnythingz.furusatotaxnotifications.presentation;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.funnythingz.furusatotaxnotifications.R;
 import com.funnythingz.furusatotaxnotifications.domain.FurusatoTaxTopics;
 import com.funnythingz.furusatotaxnotifications.domain.FurusatoTaxTopicsRepository;
 import com.funnythingz.furusatotaxnotifications.helper.DialogHelper;
