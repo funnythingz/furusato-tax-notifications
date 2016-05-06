@@ -1,5 +1,6 @@
 package com.funnythingz.furusatotaxnotifications.domain;
 
+import com.funnythingz.furusatotaxnotifications.helper.DateHelper;
 import com.google.gson.annotations.SerializedName;
 
 public class Entry {
@@ -21,7 +22,7 @@ public class Entry {
     }
 
     public String getPubDate() {
-        return pubDate;
+        return DateHelper.convertGeneralDateFormatString(pubDate);
     }
 
     public String getAuthor() {

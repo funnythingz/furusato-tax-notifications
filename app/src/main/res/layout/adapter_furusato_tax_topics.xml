@@ -29,8 +29,9 @@
                 android:id="@+id/furusato_tax_topic_entry_pubdate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#cccccc"
+                android:textColor="#999999"
                 android:textSize="10dp"
+                android:layout_marginRight="10dp"
                 tools:text="update: 2016-05-05"
                 />
 
@@ -38,9 +39,8 @@
                 android:id="@+id/furusato_tax_topic_entry_author"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#cccccc"
+                android:textColor="#999999"
                 android:textSize="10dp"
-                android:layout_marginLeft="10dp"
                 tools:text="東京都千代田区"
                 />
 

@@ -36,7 +36,9 @@ public class FurusatoTaxTopicsAdapter extends ArrayAdapter<Entry> {
 
         holder.entryAuthor.setText(entry.getAuthor());
         holder.entryTitle.setText(entry.getTitle());
-        holder.entryPubdate.setText(entry.getPubDate());
+        if (entry.getPubDate() != null) {
+            holder.entryPubdate.setText(entry.getPubDate());
+        }
 
         return convertView;
     }
