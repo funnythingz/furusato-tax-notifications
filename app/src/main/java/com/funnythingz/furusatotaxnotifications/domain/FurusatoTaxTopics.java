@@ -6,9 +6,9 @@ public class FurusatoTaxTopics {
 
     private Feed feed;
 
-    private List<Entry> entries;
+    private List<FurusatoTaxTopicEntry> entries;
 
-    public FurusatoTaxTopics(Feed feed, List<Entry> entries) {
+    public FurusatoTaxTopics(Feed feed, List<FurusatoTaxTopicEntry> entries) {
         this.feed = feed;
         this.entries = entries;
     }
@@ -17,7 +17,7 @@ public class FurusatoTaxTopics {
         return feed;
     }
 
-    public List<Entry> getEntries() {
+    public List<FurusatoTaxTopicEntry> getEntries() {
         return entries;
     }
 }

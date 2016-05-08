@@ -9,16 +9,16 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
 import com.funnythingz.furusatotaxnotifications.R;
-import com.funnythingz.furusatotaxnotifications.domain.Entry;
+import com.funnythingz.furusatotaxnotifications.domain.FurusatoTaxTopicEntry;
 import com.funnythingz.furusatotaxnotifications.presentation.adapter.holder.FurusatoTaxTopicsViewHolder;
 
 import org.sufficientlysecure.htmltextview.HtmlTextView;
 
 import java.util.List;
 
-public class FurusatoTaxTopicsAdapter extends ArrayAdapter<Entry> {
+public class FurusatoTaxTopicsAdapter extends ArrayAdapter<FurusatoTaxTopicEntry> {
 
-    public FurusatoTaxTopicsAdapter(Context context, int resource, List<Entry> objects) {
+    public FurusatoTaxTopicsAdapter(Context context, int resource, List<FurusatoTaxTopicEntry> objects) {
         super(context, resource, objects);
     }
 
@@ -36,21 +36,21 @@ public class FurusatoTaxTopicsAdapter extends ArrayAdapter<Entry> {
             convertView.setTag(holder);
         }
 
-        Entry entry = getItem(position);
+        FurusatoTaxTopicEntry furusatoTaxTopicEntry = getItem(position);
 
-        holder.entryTitle.setText(entry.getTitle());
-        holder.entryAuthor.setText(entry.getAuthor());
-        if (entry.getPubDate() != null) {
-            holder.entryPubdate.setText(entry.getPubDate());
+        holder.entryTitle.setText(furusatoTaxTopicEntry.getTitle());
+        holder.entryAuthor.setText(furusatoTaxTopicEntry.getAuthor());
+        if (furusatoTaxTopicEntry.getPubDate() != null) {
+            holder.entryPubdate.setText(furusatoTaxTopicEntry.getPubDate());
         }
 
         holder.furusatoTaxTopicsList.setOnClickListener(v -> {
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(entry.getLink()));
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(furusatoTaxTopicEntry.getLink()));
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             v.getContext().startActivity(intent);
         });
 
-        holder.entryDescription.setHtmlFromString(entry.getDescription(), new HtmlTextView.RemoteImageGetter());
+        holder.entryDescription.setHtmlFromString(furusatoTaxTopicEntry.getDescription(), new HtmlTextView.RemoteImageGetter());
 
         return convertView;
     }

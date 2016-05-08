@@ -1,6 +1,6 @@
 package com.funnythingz.furusatotaxnotifications.infra;
 
-import com.funnythingz.furusatotaxnotifications.domain.Entry;
+import com.funnythingz.furusatotaxnotifications.domain.FurusatoTaxTopicEntry;
 import com.funnythingz.furusatotaxnotifications.domain.Feed;
 import com.google.gson.annotations.SerializedName;
 
@@ -12,13 +12,13 @@ public class GetFurusatoTaxNotificationsFeed {
     private Feed feed;
 
     @SerializedName("items")
-    private List<Entry> entries;
+    private List<FurusatoTaxTopicEntry> entries;
 
     public Feed getFeed() {
         return feed;
     }
 
-    public List<Entry> getEntries() {
+    public List<FurusatoTaxTopicEntry> getEntries() {
         return entries;
     }
 }

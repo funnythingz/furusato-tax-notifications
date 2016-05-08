@@ -3,7 +3,7 @@ package com.funnythingz.furusatotaxnotifications.domain;
 import com.funnythingz.furusatotaxnotifications.helper.DateHelper;
 import com.google.gson.annotations.SerializedName;
 
-public class Entry {
+public class FurusatoTaxTopicEntry {
 
     @SerializedName("title")
     private String title;
